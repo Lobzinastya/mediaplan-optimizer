@@ -283,17 +283,54 @@ def test_comparison_semantics_snapshot_and_invalidation(language, task, monkeypa
 
 
 @pytest.mark.parametrize("language", ["ru", "en"])
-def test_reach_campaign_disables_bandits_and_simulation_but_keeps_csv(language):
-    catalog = generate_catalog(seed=42)
-    request = OptimizationRequest(task_type="B", objective_metric="reach", horizon_days=3,
-                                  target_value=10_000, planning_mode="calendar_aware")
-    result = optimize_media_plan(request, catalog)
-    campaign = start_campaign("Reach", request, result, catalog)
+@pytest.mark.parametrize("mode", ["calendar_aware", "uniform"])
+def test_reach_campaign_disables_bandits_and_simulation_but_keeps_csv(language, mode):
     app = AppTest.from_file(ROOT / "app.py").run(timeout=30)
     if language == "en":
         app.sidebar.radio[0].set_value("English").run(timeout=30)
-    app.session_state["campaign"] = campaign
-    navigate(app, "Fact Ingestion", language)
+    navigate(app, "Media Plan", language)
+    objective = next(x for x in app.selectbox if x.label == translate("Objective", language))
+    assert set(objective.options) == {translate(x, language) for x in ("clicks", "conversions")}
+    task = next(x for x in app.radio if x.label == translate("Task", language))
+    task.set_value("B — Minimum budget for target").run(timeout=30)
+    target_metric = next(x for x in app.selectbox if x.label == translate("Target metric", language))
+    assert set(target_metric.options) == {
+        translate(x, language) for x in ("clicks", "conversions", "Non-deduplicated expected reach")
+    }
+    target_metric.set_value("reach").run(timeout=30)
+    # Switching back from reach must not make Type A inherit an invalid objective.
+    next(x for x in app.radio if x.label == translate("Task", language)).set_value(
+        "A — Maximize KPI"
+    ).run(timeout=30)
+    objective = next(x for x in app.selectbox if x.label == translate("Objective", language))
+    assert objective.value in ("clicks", "conversions")
+    assert set(objective.options) == {translate(x, language) for x in ("clicks", "conversions")}
+    next(x for x in app.radio if x.label == translate("Task", language)).set_value(
+        "B — Minimum budget for target"
+    ).run(timeout=30)
+    next(x for x in app.radio if x.label == translate("Planning mode", language)).set_value(mode).run(timeout=30)
+    next(x for x in app.selectbox if x.label == translate("Target metric", language)).set_value("reach")
+    next(x for x in app.number_input if x.label == translate("Horizon, days", language)).set_value(3)
+    next(x for x in app.number_input if x.label == translate("Target value", language)).set_value(10_000)
+    button(app, "Calculate media plan", language).click().run(timeout=30)
+    assert not app.exception
+    result = app.session_state["draft_result"]
+    assert result.request.task_type.value == "B"
+    assert result.request.objective_metric.value == "reach"
+    assert result.request.planning_mode.value == mode
+    assert result.status.value == "optimal"
+    assert result.summary.reach >= 10_000 * (1 - 1e-7)
+    assert result.summary.achieved_target == result.summary.reach
+    assert translate("Non-deduplicated expected reach", language) in [x.label for x in app.metric]
+    button(app, "Start campaign workflow", language).click().run(timeout=30)
+    assert not app.exception
+    assert app.session_state["page"] == "Fact Ingestion"
+    campaign = app.session_state["campaign"]
+    assert campaign.objective.value == "reach"
+    assert campaign.original_result == result
+    assert campaign.current_day == 0
+    assert campaign.latest_plan.version_id == "v1"
+    assert app.session_state["simulator"] is None
     for key in ("Next day", "Next 3 days", "Next 7 days", "Remaining campaign"):
         assert translate(key, language) not in [x.label for x in app.button]
     assert not app.slider
@@ -304,7 +341,36 @@ def test_reach_campaign_disables_bandits_and_simulation_but_keeps_csv(language):
     policies = next(x for x in app.selectbox if x.label == translate("Adaptive policy for remaining campaign", language))
     assert policies.options == [translate("Static policy", language), translate("Periodic reoptimization", language)]
     assert "Thompson Sampling" not in policies.options and "LinUCB" not in policies.options
+    assert translate("Online bandit policies support clicks and conversions only, not reach.", language) in [x.value for x in app.info]
     assert app.session_state["campaign"] is campaign
+
+
+@pytest.mark.parametrize("language", ["ru", "en"])
+def test_synthetic_fact_shows_readable_locked_settings_without_raw_dict(language):
+    app = AppTest.from_file(ROOT / "app.py").run(timeout=30)
+    if language == "en":
+        app.sidebar.radio[0].set_value("English").run(timeout=30)
+    button(app, "Run demo", language).click().run(timeout=30)
+    button(app, "Start campaign workflow", language).click().run(timeout=30)
+    assert not app.exception
+    next(x for x in app.number_input if x.label == translate("Simulator seed", language)).set_value(17)
+    next(x for x in app.slider if x.label == translate("Hidden parameter deviation", language)).set_value(0.15)
+    next(x for x in app.checkbox if x.label == translate("Enable weekend and fatigue variation", language)).uncheck()
+    button(app, "Next day", language).click().run(timeout=30)
+    assert not app.exception
+    assert app.session_state["campaign"].current_day == 1
+    assert app.session_state["simulator_config"] == {
+        "seed": 17, "parameter_deviation": 0.15, "contextual_variation": False,
+    }
+    visible = "\n".join(str(x.value) for kind in ("caption", "markdown", "text", "code", "json") for x in app.get(kind))
+    assert str(app.session_state["simulator_config"]) not in visible
+    assert "parameter_deviation" not in visible and "contextual_variation" not in visible
+    seed = next(x for x in app.number_input if x.label == translate("Simulator seed", language))
+    deviation = next(x for x in app.slider if x.label == translate("Hidden parameter deviation", language))
+    context = next(x for x in app.checkbox if x.label == translate("Enable weekend and fatigue variation", language))
+    assert seed.value == 17 and seed.disabled
+    assert deviation.value == 0.15 and deviation.disabled
+    assert context.value is False and context.disabled
 
 
 def test_uniform_comparison_handles_infeasible_baseline():

@@ -588,10 +588,13 @@ def render_fact_ingestion() -> None:
                 context = st.checkbox(tx("Enable weekend and fatigue variation"), value=True)
             else:
                 config = st.session_state.simulator_config
-                st.caption(tx("Simulator settings locked for this campaign: {config}", config=config))
+                st.caption(tx("Simulator settings locked for this campaign."))
                 seed = config["seed"]
                 deviation = config["parameter_deviation"]
                 context = config["contextual_variation"]
+                st.number_input(tx("Simulator seed"), min_value=0, value=seed, disabled=True)
+                st.slider(tx("Hidden parameter deviation"), 0.0, 0.30, deviation, 0.05, disabled=True)
+                st.checkbox(tx("Enable weekend and fatigue variation"), value=context, disabled=True)
             quantum = st.number_input(tx("Adaptive allocation quantum, RUB"), 1_000.0, 100_000.0, 10_000.0, 1_000.0)
             buttons = st.columns(4)
             choices = [1, 3, 7, state.remaining_days]

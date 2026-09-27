@@ -256,7 +256,7 @@ RU = {
     "Simulator seed": "Seed симулятора",
     "Hidden parameter deviation": "Отклонение модели от скрытого сценария",
     "Enable weekend and fatigue variation": "Добавить выходные и накопительную усталость аудитории",
-    "Simulator settings locked for this campaign: {config}": "Параметры симулятора для кампании зафиксированы: {config}",
+    "Simulator settings locked for this campaign.": "Параметры симулятора для кампании зафиксированы.",
     "Adaptive allocation quantum, RUB": "Шаг распределения, ₽",
     "Next day": "Следующий день",
     "Next 3 days": "Следующие 3 дня",
