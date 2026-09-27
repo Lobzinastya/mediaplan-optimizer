@@ -1,2 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
 
+# Virtual environment
+.venv/
+venv/
+.release-check-venv/
+
+# Local tool caches
+.uv-cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+
+# Local logs and temporary exports (keep examples and experiment evidence)
+*.log
+*.tmp
+/logs/
+/tmp/
+/temp/
+/exports/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
 .vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml

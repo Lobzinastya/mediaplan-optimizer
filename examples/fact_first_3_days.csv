@@ -1,0 +1,7 @@
+day,channel,spend,impressions,clicks,conversions,data_label
+1,Programmatic,30000,178000,610,11,synthetic_example
+1,Marketplace 1,27000,54500,1160,54,synthetic_example
+2,Programmatic,30000,181000,625,12,synthetic_example
+2,Marketplace 1,27000,53100,1115,51,synthetic_example
+3,Programmatic,30000,175500,590,10,synthetic_example
+3,Marketplace 1,27000,55800,1200,57,synthetic_example

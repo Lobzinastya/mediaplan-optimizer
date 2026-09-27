@@ -1,0 +1,31 @@
+# DETERMINISTIC SYNTHETIC TEMPORAL ASSUMPTIONS — not measured seasonality.
+# Weekday order is Monday..Sunday. Each factor is normalized to weekly mean 1
+# after a small seed/channel-specific deterministic perturbation.
+version: 1
+provenance: pure_synthetic_temporal_scenario
+seed: 42
+profiles:
+  social:
+    supply: [1.02, 1.01, 1.00, 0.99, 0.98, 1.01, 0.99]
+    cpm: [1.00, 1.00, 0.99, 1.00, 1.01, 1.01, 0.99]
+    ctr: [1.00, 1.01, 1.00, 0.99, 0.99, 1.02, 0.99]
+    cr: [1.01, 1.01, 1.00, 1.00, 0.99, 0.99, 1.00]
+    max_spend: [1.02, 1.01, 1.00, 0.99, 0.98, 1.01, 0.99]
+  programmatic:
+    supply: [1.01, 1.00, 1.00, 1.00, 0.99, 1.00, 1.00]
+    cpm: [1.00, 1.00, 1.00, 1.00, 1.01, 1.00, 0.99]
+    ctr: [1.00, 1.00, 1.01, 1.00, 1.00, 0.99, 1.00]
+    cr: [1.00, 1.01, 1.00, 1.00, 1.00, 0.99, 1.00]
+    max_spend: [1.01, 1.00, 1.00, 1.00, 0.99, 1.00, 1.00]
+  marketplace:
+    supply: [0.98, 0.98, 0.99, 1.00, 1.02, 1.05, 0.98]
+    cpm: [0.99, 0.99, 1.00, 1.00, 1.02, 1.03, 0.97]
+    ctr: [0.98, 0.99, 1.00, 1.00, 1.02, 1.04, 0.97]
+    cr: [0.99, 0.99, 1.00, 1.01, 1.02, 1.03, 0.96]
+    max_spend: [0.98, 0.98, 0.99, 1.00, 1.02, 1.05, 0.98]
+  sms:
+    supply: [1.02, 1.03, 1.02, 1.01, 1.00, 0.98, 0.94]
+    cpm: [1.00, 1.01, 1.01, 1.00, 1.00, 0.99, 0.99]
+    ctr: [1.01, 1.02, 1.02, 1.01, 1.00, 0.98, 0.96]
+    cr: [1.01, 1.02, 1.01, 1.00, 1.00, 0.98, 0.98]
+    max_spend: [1.02, 1.03, 1.02, 1.01, 1.00, 0.98, 0.94]

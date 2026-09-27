@@ -1,0 +1,187 @@
+# BENCHMARK-DERIVED SYNTHETIC ASSUMPTIONS.
+# Public sources anchor broad orders of magnitude only. Geography, currency,
+# format, attribution windows, and metric denominators differ, so these values
+# are not measurements, forecasts, or vendor commitments.
+version: 2
+provenance: benchmark_derived_synthetic_assumptions
+seed: 42
+description: Broad public benchmark context transformed into reproducible abstract channels.
+
+benchmark_sources:
+  - source_name: Impact / Pressboard 2024 Full Year Benchmark Report
+    url: https://impact.com/downloads/research-reports/Pressboard-Benchmark-Report-2024-research-report-0425.pdf
+    category: social and programmatic/native media
+    metric: CPM and CTR
+    published_range: Meta CPM USD 3.41; TikTok CPM USD 4.37; Facebook CTR 1.44%; measured native/programmatic ad CTR 0.16%-0.24%
+    model_range: social base CPM RUB 180-300 and CTR 0.7%-1.6%; programmatic base CPM RUB 110-190 and CTR 0.25%-0.65%
+    accessed: 2026-09-16; report covers 2024-01-01 through 2024-12-31
+    transformation: Currency and market are not treated as directly comparable. Values anchor relative channel ordering and broad magnitude; RUB ranges are conservative synthetic assumptions, not FX conversions.
+  - source_name: WordStream 2025 Google Ads Benchmarks
+    url: https://www.wordstream.com/blog/2025-google-ads-benchmarks
+    category: search advertising used only as an upper directional reference
+    metric: CTR and conversion rate
+    published_range: cross-industry averages CTR 6.66% and conversion rate 7.52% across more than 16,000 search campaigns
+    model_range: media CTR 0.25%-3.0%; post-click CR 1.0%-7.0%
+    accessed: 2026-09-16; source sample covers 2024-04 through 2025-03
+    transformation: Search intent is materially higher than social/display intent, so generated abstract media ranges are deliberately lower and are not direct estimates.
+  - source_name: Teikametrics Amazon Annual Review 2024 Benchmark Report
+    url: https://go.teikametrics.com/hubfs/Ebooks/ebooks-2024/Amazon-annual-review-2024-Benchmark-report.pdf
+    category: marketplace sponsored advertising
+    metric: CPC and conversion rate
+    published_range: 2023 monthly average CPC USD 0.65-0.82; category CPC USD 0.31-1.46
+    model_range: marketplace base CPM RUB 340-560, CTR 1.3%-3.0%, and post-click CR 3.0%-7.0%
+    accessed: 2026-09-16; underlying client data covers 2022-2023
+    transformation: The model keeps lower CR than high-intent sponsored-product observations because its abstract marketplace channels mix search, display, and discovery inventory. CPM is a synthetic planning parameter, not converted from CPC.
+  - source_name: Teikametrics 2024 Amazon Prime Day Benchmark Report
+    url: https://go.teikametrics.com/hubfs/Ebooks/ebooks-2024/2024-Amazon-Prime-Day-Benchmark-Report.pdf
+    category: marketplace sponsored advertising
+    metric: post-click conversion rate
+    published_range: daily July 2023 CVR approximately 9.7%-13.3%
+    model_range: marketplace post-click CR 3.0%-7.0%
+    accessed: 2026-09-16
+    transformation: The generated range is lower because the abstract marketplace inventory includes lower-intent display and discovery placements, not only Prime Day sponsored traffic.
+  - source_name: SellerApp - Amazon CTR benchmarks
+    url: https://www.sellerapp.com/blog/boost-your-amazon-ctr-before-your-competitors-do/
+    category: marketplace sponsored advertising
+    metric: CTR
+    published_range: typical 0.3%-0.7%; 0.8%-1.5% described as good and above 1.5% as strong
+    model_range: marketplace CTR 1.3%-3.0%
+    accessed: 2026-09-16
+    transformation: Abstract channels include a deliberately stronger high-intent tail. Combined with Teikametrics CPC, the source provides only an order-of-magnitude check for implied CPM; no direct RUB conversion is claimed.
+  - source_name: Google Ads Help - About YouTube ads and view metrics
+    url: https://support.google.com/google-ads/answer/2375431?hl=en-419
+    category: video inventory
+    metric: TrueView view rate
+    published_range: Google describes about 10%-15% as average for in-stream across industries and warns that format definitions differ
+    model_range: VTR 6%-38% across mixed abstract media formats
+    accessed: 2026-09-16
+    transformation: The deliberately broad range represents mixed formats; VTR values are not assumed comparable across formats.
+  - source_name: Klaviyo Help Center - Campaign SMS and MMS benchmarks
+    url: https://help.klaviyo.com/hc/en-us/articles/360051110111
+    category: SMS
+    metric: click rate and conversion rate
+    published_range: good click rate 8.9%-14.5%; good conversion rate 1.0%-2.0% of recipients for US Klaviyo customers
+    model_range: CTR 2.5%-4.0%; post-click CR 2.5%-5.0%
+    accessed: 2026-09-16; source updated 2025-10-28
+    transformation: Generated rates are reduced for broad, non-opt-in-style planning. Source conversion uses a recipient denominator, so it is not used directly as post-click CR.
+  - source_name: Twilio US SMS pricing
+    url: https://www.twilio.com/en-us/sms/pricing/us
+    category: SMS
+    metric: cost per outbound message
+    published_range: starts at USD 0.0083 per outbound message segment, excluding applicable carrier and sender fees
+    model_range: low-volume marginal cost RUB 0.28-0.38 per delivered contact, represented as CPM RUB 280-380
+    accessed: 2026-09-16; pricing is mutable and geography-specific
+    transformation: The model range is a synthetic local planning assumption, not an FX conversion or Twilio quote. The source establishes per-message rather than auction pricing.
+  - source_name: Project inventory assumption
+    url: null
+    category: all abstract channels
+    metric: daily capacity, reach ratio, spend cap, audience exhaustion, SMS cost
+    published_range: unavailable
+    model_range: channel-specific ranges below
+    accessed: 2026-09-16
+    transformation: No comparable public inventory or Russian commercial rate card was supplied. These fields remain explicit synthetic assumptions requiring replacement before business use.
+
+channels:
+  Social Network 1:
+    channel_type: media
+    daily_capacity: [1800000, 2600000]
+    daily_reach_ratio: [0.42, 0.58]
+    base_cpm_rub: [220, 300]
+    max_daily_spend: [1200000, 1700000]
+    average_frequency: [1.8, 2.5]
+    base_ctr: [0.009, 0.016]
+    base_cr: [0.018, 0.038]
+    base_vtr: [0.22, 0.38]
+    ctr_saturation_decay: [0.08, 0.15]
+    cr_saturation_decay: [0.04, 0.10]
+
+  Social Network 2:
+    channel_type: media
+    daily_capacity: [1300000, 2100000]
+    daily_reach_ratio: [0.45, 0.62]
+    base_cpm_rub: [200, 280]
+    max_daily_spend: [900000, 1350000]
+    average_frequency: [1.7, 2.4]
+    base_ctr: [0.007, 0.014]
+    base_cr: [0.016, 0.034]
+    base_vtr: [0.18, 0.34]
+    ctr_saturation_decay: [0.08, 0.15]
+    cr_saturation_decay: [0.04, 0.10]
+
+  Social Network 3:
+    channel_type: media
+    daily_capacity: [900000, 1600000]
+    daily_reach_ratio: [0.48, 0.66]
+    base_cpm_rub: [180, 260]
+    max_daily_spend: [700000, 1050000]
+    average_frequency: [1.6, 2.3]
+    base_ctr: [0.008, 0.015]
+    base_cr: [0.015, 0.032]
+    base_vtr: [0.20, 0.36]
+    ctr_saturation_decay: [0.08, 0.15]
+    cr_saturation_decay: [0.04, 0.10]
+
+  Programmatic:
+    channel_type: media
+    daily_capacity: [3000000, 4800000]
+    daily_reach_ratio: [0.34, 0.50]
+    base_cpm_rub: [110, 190]
+    max_daily_spend: [1600000, 2400000]
+    average_frequency: [2.1, 3.2]
+    base_ctr: [0.0025, 0.0065]
+    base_cr: [0.010, 0.026]
+    base_vtr: [0.12, 0.28]
+    ctr_saturation_decay: [0.06, 0.12]
+    cr_saturation_decay: [0.03, 0.08]
+
+  Marketplace 1:
+    channel_type: media
+    daily_capacity: [750000, 1250000]
+    daily_reach_ratio: [0.50, 0.68]
+    base_cpm_rub: [420, 560]
+    max_daily_spend: [800000, 1250000]
+    average_frequency: [1.5, 2.2]
+    base_ctr: [0.014, 0.027]
+    base_cr: [0.030, 0.065]
+    base_vtr: [0.08, 0.20]
+    ctr_saturation_decay: [0.08, 0.16]
+    cr_saturation_decay: [0.06, 0.12]
+
+  Marketplace 2:
+    channel_type: media
+    daily_capacity: [600000, 1050000]
+    daily_reach_ratio: [0.52, 0.70]
+    base_cpm_rub: [340, 480]
+    max_daily_spend: [680000, 1080000]
+    average_frequency: [1.4, 2.1]
+    base_ctr: [0.016, 0.030]
+    base_cr: [0.032, 0.070]
+    base_vtr: [0.07, 0.18]
+    ctr_saturation_decay: [0.08, 0.16]
+    cr_saturation_decay: [0.06, 0.12]
+
+  Marketplace 3:
+    channel_type: media
+    daily_capacity: [480000, 900000]
+    daily_reach_ratio: [0.54, 0.72]
+    base_cpm_rub: [340, 480]
+    max_daily_spend: [560000, 900000]
+    average_frequency: [1.4, 2.0]
+    base_ctr: [0.013, 0.026]
+    base_cr: [0.028, 0.062]
+    base_vtr: [0.06, 0.16]
+    ctr_saturation_decay: [0.08, 0.16]
+    cr_saturation_decay: [0.06, 0.12]
+
+  SMS:
+    channel_type: sms
+    daily_capacity: [300000, 520000]
+    daily_reach_ratio: [0.88, 0.98]
+    base_cpm_rub: [280, 380]
+    max_daily_spend: [260000, 430000]
+    average_frequency: [1.0, 1.15]
+    base_ctr: [0.025, 0.040]
+    base_cr: [0.025, 0.050]
+    base_vtr: null
+    ctr_saturation_decay: [0.05, 0.10]
+    cr_saturation_decay: [0.03, 0.08]

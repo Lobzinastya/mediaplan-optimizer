@@ -1,0 +1,120 @@
+# GENERATED FILE: deterministic benchmark-derived synthetic catalog (seed 42).
+# Values use broad public benchmark context; they are not forecasts.
+metadata:
+  provenance: benchmark_derived_synthetic_assumptions
+  seed: 42
+  notice: Illustrative values generated from broad public benchmark-derived ranges;
+    not forecasts or vendor commitments.
+channels:
+  Social Network 1:
+    name: Social Network 1
+    channel_type: media
+    daily_capacity: 2218536.0
+    daily_reach_capacity: 1101018.0
+    base_cpm_rub: 223.7718
+    response_scale_rub: 496446.0
+    max_daily_spend: 1290644.0
+    average_frequency: 2.314
+    base_ctr: 0.015727
+    base_cr: 0.037495
+    base_vtr: 0.225332
+    ctr_saturation_decay: 0.107055
+    cr_saturation_decay: 0.088881
+  Social Network 2:
+    name: Social Network 2
+    channel_type: media
+    daily_capacity: 1836692.0
+    daily_reach_capacity: 1047201.0
+    base_cpm_rub: 268.3028
+    response_scale_rub: 492790.0
+    max_daily_spend: 1203807.0
+    average_frequency: 1.8525
+    base_ctr: 0.013979
+    base_cr: 0.018169
+    base_vtr: 0.300918
+    ctr_saturation_decay: 0.127145
+    cr_saturation_decay: 0.049033
+  Social Network 3:
+    name: Social Network 3
+    channel_type: media
+    daily_capacity: 1291540.0
+    daily_reach_capacity: 639111.0
+    base_cpm_rub: 180.9401
+    response_scale_rub: 233691.0
+    max_daily_spend: 903705.0
+    average_frequency: 2.1299
+    base_ctr: 0.014878
+    base_cr: 0.030169
+    base_vtr: 0.278092
+    ctr_saturation_decay: 0.104818
+    cr_saturation_decay: 0.089481
+  Programmatic:
+    name: Programmatic
+    channel_type: media
+    daily_capacity: 4490484.0
+    daily_reach_capacity: 1582855.0
+    base_cpm_rub: 149.1393
+    response_scale_rub: 669708.0
+    max_daily_spend: 2012401.0
+    average_frequency: 2.9787
+    base_ctr: 0.003466
+    base_cr: 0.017835
+    base_vtr: 0.273751
+    ctr_saturation_decay: 0.095907
+    cr_saturation_decay: 0.06975
+  Marketplace 1:
+    name: Marketplace 1
+    channel_type: media
+    daily_capacity: 912863.0
+    daily_reach_capacity: 589528.0
+    base_cpm_rub: 464.6439
+    response_scale_rub: 424156.0
+    max_daily_spend: 1204451.0
+    average_frequency: 2.0563
+    base_ctr: 0.021419
+    base_cr: 0.048762
+    base_vtr: 0.085966
+    ctr_saturation_decay: 0.117409
+    cr_saturation_decay: 0.114196
+  Marketplace 2:
+    name: Marketplace 2
+    channel_type: media
+    daily_capacity: 861009.0
+    daily_reach_capacity: 539473.0
+    base_cpm_rub: 433.4581
+    response_scale_rub: 373211.0
+    max_daily_spend: 752768.0
+    average_frequency: 1.8513
+    base_ctr: 0.026421
+    base_cr: 0.038459
+    base_vtr: 0.136355
+    ctr_saturation_decay: 0.150245
+    cr_saturation_decay: 0.065922
+  Marketplace 3:
+    name: Marketplace 3
+    channel_type: media
+    daily_capacity: 529239.0
+    daily_reach_capacity: 317641.0
+    base_cpm_rub: 354.0741
+    response_scale_rub: 187390.0
+    max_daily_spend: 689619.0
+    average_frequency: 1.8449
+    base_ctr: 0.016268
+    base_cr: 0.03429
+    base_vtr: 0.106048
+    ctr_saturation_decay: 0.113286
+    cr_saturation_decay: 0.083004
+  SMS:
+    name: SMS
+    channel_type: sms
+    daily_capacity: 396112.0
+    daily_reach_capacity: 382150.0
+    base_cpm_rub: 351.7464
+    response_scale_rub: 139331.0
+    max_daily_spend: 347691.0
+    average_frequency: 1.0462
+    base_ctr: 0.034807
+    base_cr: 0.029137
+    base_vtr: null
+    ctr_saturation_decay: 0.066625
+    cr_saturation_decay: 0.040864
