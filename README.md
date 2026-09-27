@@ -13,7 +13,7 @@
 
 **Онлайн-версия:** https://shad-capstone-mediaplan-optimizer.streamlit.app/
 
-**Скринкаст:** [YouTube - демонстрация проекта](YOUTUBE_LINK)
+**Скринкаст:** [[YouTube - демонстрация проекта](https://youtu.be/dqSGiiZn_nc)]
 
 ## О проекте
 
